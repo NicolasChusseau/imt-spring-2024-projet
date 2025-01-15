@@ -2,7 +2,12 @@ package org.imt.tournamentmaster.model.equipe;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 import java.util.Objects;
 
@@ -11,12 +16,18 @@ public class Joueur {
 
     @JsonIgnore
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @NotBlank(message = "Le nom est obligatoire")
+    @Size(max = 50, message = "Le nom ne doit pas dépasser 50 caractères")
     private String nom;
 
+    @NotBlank(message = "Le prénom est obligatoire")
+    @Size(max = 50, message = "Le prénom ne doit pas dépasser 50 caractères")
     private String prenom;
 
+    @Min(value = 1, message = "Le numéro du joueur doit être supérieur ou égal à 1")
     private int numero;
 
     public Joueur() {

@@ -2,6 +2,9 @@ package org.imt.tournamentmaster.model.match;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import org.imt.tournamentmaster.model.equipe.Equipe;
 
 import java.util.List;
@@ -13,17 +16,23 @@ public class Match {
 
     @JsonIgnore
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @NotNull(message = "L'équipe A est obligatoire")
     @OneToOne
     private Equipe equipeA;
 
+    @NotNull(message = "L'équipe B est obligatoire")
     @OneToOne
     private Equipe equipeB;
 
-    @OneToMany
-    private List<Round> rounds; // Set est un type de collection, on va éviter les confusions et appeler ça un "round"
+    @NotEmpty(message = "Les rounds sont obligatoires")
+    @Size(min = 1, max = 5, message = "Un match doit contenir entre 1 et 5 rounds")
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Round> rounds;
 
+    @NotNull(message = "Le statut est obligatoire")
     private Status status;
 
     public Match() {

@@ -1,9 +1,10 @@
 package org.imt.tournamentmaster.model.match;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
 import org.imt.tournamentmaster.model.equipe.Equipe;
 
 import java.util.Objects;
@@ -13,18 +14,26 @@ public class Round {
 
     @JsonIgnore
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @NotNull(message = "L'équipe A est obligatoire")
     @OneToOne
     private Equipe equipeA;
 
+    @NotNull(message = "L'équipe B est obligatoire")
     @OneToOne
     private Equipe equipeB;
 
+    @Min(value = 0, message = "Le score ne peut pas être négatif")
+    @Max(value = 99, message = "Le score ne peut pas être supérieur à 99")
     private int scoreA;
 
+    @Min(value = 0, message = "Le score ne peut pas être négatif")
+    @Max(value = 99, message = "Le score ne peut pas être supérieur à 99")
     private int scoreB;
 
+    @Min(value = 1, message = "Le numéro de round doit être supérieur ou égal à 1")
     private int roundNumber;
 
     public Round() {
