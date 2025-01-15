@@ -5,6 +5,8 @@ import org.imt.tournamentmaster.model.match.Match;
 import org.imt.tournamentmaster.service.match.MatchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,6 +23,7 @@ public class MatchController {
         this.matchService = matchService;
     }
 
+    @PreAuthorize("hasRole('USER')")
     @GetMapping("/{id}")
     public ResponseEntity<Match> getById(@PathVariable long id) {
         Optional<Match> match = matchService.getById(id);
@@ -52,7 +55,6 @@ public class MatchController {
         }
     }
 
-
     @GetMapping
     public List<Match> getAll() {
         return matchService.getAll();
@@ -66,6 +68,7 @@ public class MatchController {
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
+    @Secured("ROLE_ADMIN")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@Valid @PathVariable long id) {
         matchService.delete(id);

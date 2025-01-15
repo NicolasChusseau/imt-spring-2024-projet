@@ -1,4 +1,4 @@
-package org.imt.tournamentmaster.configAOP;
+package org.imt.tournamentmaster.configs.AOP;
 
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
