@@ -22,8 +22,8 @@ INSERT INTO round (id, equipea_id, equipeb_id, scorea, scoreb, round_number) VAL
 INSERT INTO round (id, equipea_id, equipeb_id, scorea, scoreb, round_number) VALUES (5, 1, 2, 1, 2, 5);
 INSERT INTO round (id, equipea_id, equipeb_id, scorea, scoreb, round_number) VALUES (6, 1, 2, 2, 1, 6);
 
-INSERT INTO `match` (id, equipea_id, equipeb_id, status) VALUES (1, 1, 2, 2);
-INSERT INTO `match` (id, equipea_id, equipeb_id, status) VALUES (2, 1, 2, 2);
+INSERT INTO `match` (id, equipea_id, equipeb_id, date, status) VALUES (1, 1, 2, '2021-01-01', 2);
+INSERT INTO `match` (id, equipea_id, equipeb_id, date, status) VALUES (2, 1, 2, '2021-01-02', 2);
 
 INSERT INTO match_rounds (match_id, rounds_id) VALUES (1, 1);
 INSERT INTO match_rounds (match_id, rounds_id) VALUES (1, 2);

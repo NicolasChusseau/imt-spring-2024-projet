@@ -7,6 +7,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import org.imt.tournamentmaster.model.equipe.Equipe;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 
@@ -20,12 +21,15 @@ public class Match {
     private long id;
 
     @NotNull(message = "L'équipe A est obligatoire")
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Equipe equipeA;
 
     @NotNull(message = "L'équipe B est obligatoire")
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Equipe equipeB;
+
+    @NotNull(message = "La date est obligatoire")
+    private LocalDate date;
 
     @NotEmpty(message = "Les rounds sont obligatoires")
     @Size(min = 1, max = 5, message = "Un match doit contenir entre 1 et 5 rounds")
@@ -38,10 +42,11 @@ public class Match {
     public Match() {
     }
 
-    public Match(long id, Equipe equipeA, Equipe equipeB, List<Round> rounds, Status status) {
+    public Match(long id, Equipe equipeA, Equipe equipeB, LocalDate date, List<Round> rounds, Status status) {
         this.id = id;
         this.equipeA = equipeA;
         this.equipeB = equipeB;
+        this.date = date;
         this.rounds = rounds;
         this.status = status;
     }
@@ -68,6 +73,14 @@ public class Match {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 
     public void setEquipeA(Equipe equipeA) {

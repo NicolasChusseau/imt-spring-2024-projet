@@ -3,6 +3,10 @@ package org.imt.tournamentmaster.model.resultat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 import org.imt.tournamentmaster.model.equipe.Equipe;
 import org.imt.tournamentmaster.model.match.Match;
 
@@ -19,7 +23,6 @@ public class Resultat {
     @NotNull(message = "Le match associé est obligatoire")
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     private Match match;
-
 
     public Resultat() {
     }
