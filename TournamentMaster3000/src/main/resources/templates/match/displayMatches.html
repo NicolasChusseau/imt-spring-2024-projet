@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Display matches</title>
+</head>
+<body>
+
+<h1>Matches</h1>
+
+<table border="1">
+    <tr>
+        <th>Match ID</th>
+        <th>Team A</th>
+        <th>Team B</th>
+        <th>Match Date</th>
+        <th>Match Status</th>
+        <th>Match Winner</th>
+    </tr>
+    <tr th:each="match : ${matches}">
+        <td th:text="${match.id}"></td>
+        <td>
+            <a th:text="${match.equipeA.nom}"
+               th:href="@{'/equipe/' + ${match.equipeA.id}}">
+            </a>
+        </td>
+        <td>
+            <a th:text="${match.equipeB.nom}"
+                  th:href="@{'/equipe/' + ${match.equipeB.id}}">
+            </a>
+        </td>
+        <td th:text="${match.date}"></td>
+        <td th:text="${match.status}"></td>
+        <td>
+            <a th:if="${match.status == match.status.TERMINE}"
+               th:text="${match.winnerName}"
+               th:href="@{'/equipe/' + ${match.winnerId}}">
+            </a>
+        </td>
+    </tr>
+</table>
+
+</body>
+</html>

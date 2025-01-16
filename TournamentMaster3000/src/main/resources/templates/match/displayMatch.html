@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Détails d'un match</title>
+</head>
+<body style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+
+<h1 th:text="'Match' + ${match.id}"></h1>
+
+<div style="display: flex; flex-direction: column;">
+    <span th:text="${'Ce match a opposé l''équipe ' + match.equipeA.nom
+                    + ' à l''équipe ' + match.equipeB.nom
+                    + ' le '+ match.date} + '.'">
+    </span>
+    <span th:if="${match.status != match.status.TERMINE}"
+          th:text="'Statut du match : ' + ${match.status}'"></span>
+    <span th:if="${match.status == match.status.TERMINE}"
+            th:text="${'Le vainqueur du match est l''équipe: ' + match.winnerName + '.'}"></span>
+
+    <span th:text="${'Ce match s''est déroulé en ' + match.rounds.size() + ' rounds.'}"></span>
+</div>
+
+<table border="1">
+    <tr>
+        <th>Round number</th>
+        <th th:text="'Score ' + ${match.equipeA.nom}"></th>
+        <th th:text="'Score ' + ${match.equipeB.nom}"></th>
+    </tr>
+    <tr th:each="round : ${match.rounds}">
+        <td th:text="${round.roundNumber}"></td>
+        <td th:text="${round.scoreA}"></td>
+        <td th:text="${round.scoreB}"></td>
+    </tr>
+</table>
+
+</body>
+</html>
