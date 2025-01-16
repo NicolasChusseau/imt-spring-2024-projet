@@ -120,6 +120,14 @@ public class Match {
         }
     }
 
+    public String getWinnerName() {
+        return determineWinner().getNom();
+    }
+
+    public Long getWinnerId() {
+        return determineWinner().getId();
+    }
+
     @Override
     public String toString() {
         return "Match{" +
