@@ -6,6 +6,7 @@ import org.imt.tournamentmaster.model.match.Match;
 import org.imt.tournamentmaster.model.match.Round;
 import org.imt.tournamentmaster.model.resultat.Resultat;
 
+import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -36,7 +37,7 @@ public abstract class TestUtils {
         rounds.add(round3);
 
         // create a match
-        Match match = new Match(1L, equipe1, equipe2, rounds, Match.Status.TERMINE);
+        Match match = new Match(1L, equipe1, equipe2, LocalDate.now(), rounds, Match.Status.TERMINE);
 
         // create a resultat
         return new Resultat(1L, match);

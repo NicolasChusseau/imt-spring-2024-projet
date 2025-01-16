@@ -5,6 +5,10 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 import org.imt.tournamentmaster.model.equipe.Equipe;
 
 import java.util.Objects;
@@ -18,11 +22,11 @@ public class Round {
     private long id;
 
     @NotNull(message = "L'équipe A est obligatoire")
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Equipe equipeA;
 
     @NotNull(message = "L'équipe B est obligatoire")
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Equipe equipeB;
 
     @Min(value = 0, message = "Le score ne peut pas être négatif")
