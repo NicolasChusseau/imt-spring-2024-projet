@@ -18,7 +18,10 @@
         <th>Match Winner</th>
     </tr>
     <tr th:each="match : ${matches}">
-        <td th:text="${match.id}"></td>
+        <td>
+            <a th:text="${match.id}"
+               th:href="@{'/match/' + ${match.id}}"></a>
+        </td>
         <td>
             <a th:text="${match.equipeA.nom}"
                th:href="@{'/equipe/' + ${match.equipeA.id}}">
